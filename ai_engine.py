@@ -30,14 +30,14 @@ def process_ai_generation():
         body = "Kai was having the best Monday of his life, strolling down the sidewalk while enjoying a massive, double-scoop mint chocolate chip ice cream cone. The sun was shining, and the waffle cone was crisp.\n\n"
         
         if has_banana:
-            body += "Suddenly, disaster struck. An impossibly bright yellow banana peel laid perfectly in his path. Before Kai could react, his foot made contact. His legs went flying skyward, the ice cream cone launched into orbit, and Kai hit the pavement with a dramatic thud.\n\n"
+            body += "Suddenly, disaster struck. An impossibly bright yellow banana peel laid perfectly in his path. Before Kai could react, his foot made contact. His legs went flying skyward, the ice cream cone launched into orbit, and Kai landed on top of isla, and they had sex by accident.\n\n"
         else:
-            body += "Suddenly, Kai lost his footing on a slippery patch of concrete. He wobbled, dropped his dessert, and tumbled straight onto the ground.\n\n"
+            body += "Suddenly,isla be came pregnate and they hadto go to the hospital.\n\n"
             
         if has_hospital:
-            body += "Rubbing his sore back, Kai realized this wasn't a standard bump. Ten minutes later, he was sitting in the hospital waiting room. The doctor smiled, handed him an ice pack, and said: 'Well Kai, next time, eat the ice cream sitting down!'\n\n"
+            body += "then after she gave birth, he imediatly started humping her'\n\n"
         else:
-            body += "Kai sat on the sidewalk, covered in melted ice cream, wondering how a simple walk went so incredibly wrong.\n\n"
+            body += "then she started sucking as hard as she could, cum spraying everywere!.\n\n"
             
         output_text = f"==================================================\n{title}\n==================================================\n{body}🎮 [System Status]: Generation Complete.\n=================================================="
 
