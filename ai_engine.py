@@ -14,7 +14,19 @@ def process_ai_generation():
     if not user_prompt:
         output_text = "⚠️ SYSTEM ERROR: Prompt file is empty. Type a command inside prompt.txt."
     
-    # 2. Local Generative Architecture Matrix (Token Core Engine)
+    # 2. Local Generative Architecture Matrix (Upgraded Token Engine)
+    elif "hi" in user_prompt or "hello" in user_prompt or "hey" in user_prompt:
+        output_text = (
+            "==================================================\n"
+            "👋 CHATGITPT TERMINAL RESPONSE\n"
+            "==================================================\n"
+            "Hello there! Your custom GitHub AI engine is online.\n\n"
+            "System Status: 🟢 Fully Operational\n"
+            "Environment: Securly-Proof Cloud Automation Container\n"
+            "Current Time: Monday, September 14, 2026\n\n"
+            "Ready for instructions. Try switching your prompt.txt\n"
+            "to keywords like 'code' or 'structure' to run modules!"
+        )
     elif "code" in user_prompt or "script" in user_prompt or "python" in user_prompt:
         output_text = (
             "==================================================\n"
@@ -53,6 +65,7 @@ def process_ai_generation():
             "==================================================\n"
             "Type your command into 'prompt.txt' and commit changes.\n"
             "Supported keyword triggers:\n"
+            "➡️ 'hi'        : Displays system welcome interface\n"
             "➡️ 'code'      : Generates functional programming scripts\n"
             "➡️ 'structure' : Generates formatted scannable templates\n"
             "➡️ 'help'      : Shows this interaction menu matrix\n"
@@ -64,7 +77,7 @@ def process_ai_generation():
             "==================================================\n"
             f"Parsed Prompt String Logged: \"{user_prompt}\"\n\n"
             "💡 [Local Advice]: No major execution token triggered.\n"
-            "Try adding keywords like 'code' or 'structure' to prompt.txt."
+            "Try adding keywords like 'code', 'hi', or 'structure' to prompt.txt."
         )
 
     # 3. Output the text directly back into your repository
@@ -74,3 +87,4 @@ def process_ai_generation():
 
 if __name__ == "__main__":
     process_ai_generation()
+
