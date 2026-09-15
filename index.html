@@ -1,3 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c00lgui terminal</title>
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', 'Chalkboard SE', Arial, sans-serif; 
+            background-color: #1a1a1a; 
+            color: #ffffff; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            min-height: 90vh;
+            margin: 0;
+            background-image: repeating-linear-gradient(0deg, #111 0px, #111 2px, #1a1a1a 2px, #1a1a1a 4px);
+        }
+
+        /* 🟥 Authentic c00lgui Black & Thick Red Border Shell Frame */
+        .terminal { 
+            width: 100%; 
+            max-width: 500px; 
+            background: #000000; 
+            border: 6px solid #ff0000; 
+            border-radius: 0px; 
+            padding: 12px; 
+            box-shadow: 6px 6px 0px #000000;
+            box-sizing: border-box;
+        }
+        
+        .header { 
+            color: #ffffff; 
+            font-weight: bold; 
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            text-shadow: 2px 2px #ff0000;
+        }
+        
+        .output-box { 
+            height: 140px; 
+            overflow-y: auto; 
+            margin-bottom: 12px; 
+            font-size: 15px; 
+            line-height: 1.4; 
+            color: #ffffff; 
+            white-space: pre-wrap; 
+            background: #000000;
+            padding: 10px;
+            border: 4px solid #ff0000;
+            border-radius: 0px;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            background: #000000;
+            border: 4px solid #ff0000;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        textarea { 
+            width: 95%; 
+            height: 45px; 
+            background: #111111; 
+            color: #ffffff; 
+            border: 2px solid #ff0000; 
+            border-radius: 0px; 
+            padding: 8px; 
+            font-family: inherit; 
+            font-size: 14px; 
+            resize: none; 
+            display: block;
+            margin: 0 auto;
+            text-transform: uppercase;
+        }
+        
+        textarea:focus { 
+            outline: none; 
+            background: #000000;
+        }
+        
+        /* Exploit Grid Module Layout (Two-Column Format) */
+        .exploit-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px; 
+            width: 100%; 
+        }
+        
+        button { 
+            background: #ff0000; 
+            color: #ffffff; 
+            border: 2px solid #ffffff; 
+            padding: 10px; 
+            font-family: inherit; 
+            font-weight: bold; 
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 0px;
+            transition: background 0.1s;
+        }
+        
+        button:hover { 
+            background: #cc0000;
+        }
+        
+        button:disabled { 
+            background: #333333; 
+            color: #777777;
+            border-color: #555555;
+            cursor: not-allowed; 
+        }
+        
+        .btn-utility {
+            background: #222222;
+            border-color: #ff0000;
+        }
+        .btn-utility:hover {
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal">
+    <div class="header">c00lgui xddd</div>
+    
+    <div class="output-box" id="output">SYSTEM STATUS: INITIALIZING CHAT EXPLORER MATRIX...</div>
+    
+    <div class="input-wrapper">
+        <textarea id="input" placeholder="ENTER INSTRUCTION COMMAND VECTOR DATA..." disabled></textarea>
+    </div>
+    
+    <div class="exploit-grid">
+        <button id="run-btn" onclick="executeHax()" disabled>LOADING MATRIX...</button>
+        <button id="reset-btn" class="btn-utility" onclick="purgeLogs()" disabled>PURGE ALL</button>
+        <button id="sky-btn" class="btn-utility" onclick="triggerSkybox()" disabled>SET SKYBOX</button>
+        <button id="esp-btn" class="btn-utility" onclick="triggerESP()" disabled>ESP TRACK</button>
+    </div>
+</div>
+
 <script>
     const outputBox = document.getElementById('output');
     const inputArea = document.getElementById('input');
@@ -7,7 +157,7 @@
     const espBtn = document.getElementById('esp-btn');
 
     function initAI() {
-        outputBox.innerText = "TEAM C00LKIDD JOIN TODAY!!! FAST MATRIX PROXY ONLINE. INPUT COMMAND NOW.";
+        outputBox.innerText = "TEAM C00LKIDD JOIN TODAY!!! FAST UNBLOCKED MATRIX PROXY ONLINE. INPUT COMMAND NOW.";
         inputArea.disabled = false;
         runBtn.disabled = false;
         resetBtn.disabled = false;
@@ -16,7 +166,7 @@
         runBtn.innerText = "CLICK 2 RUN H4X!!";
     }
 
-    async function executeHax() {
+    function executeHax() {
         const userPrompt = inputArea.value.trim();
         if (!userPrompt) return;
 
@@ -24,35 +174,45 @@
         inputArea.value = "";
         runBtn.disabled = true;
 
-        try {
-            // Using a standard cloud-worker text proxy that slips right under school web filters
-            const targetUrl = `https://duckduckgo.com{encodeURIComponent(userPrompt)}&format=json&no_html=1`;
-            const response = await fetch(targetUrl);
-            const data = await response.json();
-            
-            let aiText = "";
-            
-            // Check if we got an instant definition or a web summary back
-            if (data.AbstractText) {
-                aiText = data.AbstractText;
-            } else if (data.RelatedTopics && data.RelatedTopics.length > 0 && data.RelatedTopics[0].Text) {
-                aiText = data.RelatedTopics[0].Text;
-            } else {
-                // If it's a casual phrase like "say hi", the language matrix computes an aggressive response
-                const variations = [
-                    "C00LGUI SYSTEM ONLINE! WHAT DO U WANT BOZO!1!!",
-                    "TH1NK F4ST! MATRIX CHAT NODE RESPONDING TO GENERATION INJECTION!",
-                    "G3T PWN3DD!! CORE TELEMETRY DETECTED AND LOADED SUCCESSFULLY!"
+        // Clean, ultra-fast client-side generation tree built with valid Javascript syntax rules
+        setTimeout(() => {
+            const cleanPrompt = userPrompt.toLowerCase();
+            let matrixOutput = "";
+
+            if (cleanPrompt.includes("story") || cleanPrompt.includes("write") || cleanPrompt.includes("tale")) {
+                matrixOutput = "📝 EXPLODE STORY MODULE SUCCESSFUL\n" +
+                               "--------------------------------------------------\n" +
+                               "PROMPT STRING SEEN: " + userPrompt.toUpperCase() + "\n\n" +
+                               "ONCE UPON A TIME, A BOZO SENT A PROMPT TO C00LGUI. " +
+                               "THE RED BORDERS FLASHED, TRAPPING INTERCEPT DATA LINES INSTANTLY. " +
+                               "U JUST GOT H4XX3DD!!! THE SCRIPT CLOSED SUCCESSFULLY.";
+            }
+            else if (cleanPrompt.includes("code") || cleanPrompt.includes("script") || cleanPrompt.includes("python")) {
+                matrixOutput = "💻 INJECT UTILITY CODE VECTOR SUCCESSFUL\n" +
+                               "--------------------------------------------------\n" +
+                               "DEF RUN_C00L_HAX_PROCESS():\n" +
+                               "    # PARAM SOURCE IN: '" + userPrompt.toUpperCase() + "'\n" +
+                               "    PRINT('G3T PWN3DD!! CHAT CORE INITIATED...')\n" +
+                               "    RETURN TRUE\n\n" +
+                               "RUN_C00L_HAX_PROCESS()";
+            }
+            else {
+                // High-velocity generation echo system
+                const responses = [
+                    "C00LGUI MATRIX ANSWER: WHAT DO U WANT BOZO!1!!",
+                    "G3T PWN3DD!! CORE TELEMETRY MATRIX PROCESSED YOUR INPUT STRING!",
+                    "TH1NK F4ST! SYSTEM ECHOS LOGGED VALUE SUCCESSFUL!"
                 ];
-                aiText = variations[Math.floor(Math.random() * variations.length)] + `\n\n[PARSED SOURCE CONTEXT]: "${userPrompt}"`;
+                const randomChoice = responses[Math.floor(Math.random() * responses.length)];
+                matrixOutput = "✨ CHATGITPT LIVE GENERATIVE MATRIX\n" +
+                               "--------------------------------------------------\n" +
+                               randomChoice + "\n\n" +
+                               "[INPUT STRINGS READ]: \"" + userPrompt.toUpperCase() + "\"";
             }
 
-            outputBox.innerText = "COMPUTATION RETURN SHEET:\n\n" + aiText.toUpperCase();
-
-        } catch (error) {
-            outputBox.innerText = "XDDD REKT ERROR: CONNECTION FAILED\n\nRAW: " + error.message.toUpperCase();
-        }
-        runBtn.disabled = false;
+            outputBox.innerText = matrixOutput;
+            runBtn.disabled = false;
+        }, 300);
     }
 
     function purgeLogs() {
@@ -70,78 +230,6 @@
 
     initAI();
 </script>
-<script>
-    const outputBox = document.getElementById('output');
-    const inputArea = document.getElementById('input');
-    const runBtn = document.getElementById('run-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const skyBtn = document.getElementById('sky-btn');
-    const espBtn = document.getElementById('esp-btn');
 
-    function initAI() {
-        outputBox.innerText = "TEAM C00LKIDD JOIN TODAY!!! FAST MATRIX PROXY ONLINE. INPUT COMMAND NOW.";
-        inputArea.disabled = false;
-        runBtn.disabled = false;
-        resetBtn.disabled = false;
-        skyBtn.disabled = false;
-        espBtn.disabled = false;
-        runBtn.innerText = "CLICK 2 RUN H4X!!";
-    }
-
-    async function executeHax() {
-        const userPrompt = inputArea.value.trim();
-        if (!userPrompt) return;
-
-        outputBox.innerText = "COMPUTING VALUE MATRIX STEPS... TH1NK F4ST!!!";
-        inputArea.value = "";
-        runBtn.disabled = true;
-
-        try {
-            // Using a standard cloud-worker text proxy that slips right under school web filters
-            const targetUrl = `https://duckduckgo.com{encodeURIComponent(userPrompt)}&format=json&no_html=1`;
-            const response = await fetch(targetUrl);
-            const data = await response.json();
-            
-            let aiText = "";
-            
-            // Check if we got an instant definition or a web summary back
-            if (data.AbstractText) {
-                aiText = data.AbstractText;
-            } else if (data.RelatedTopics && data.RelatedTopics.length > 0 && data.RelatedTopics[0].Text) {
-                aiText = data.RelatedTopics[0].Text;
-            } else {
-                // If it's a casual phrase like "say hi", the language matrix computes an aggressive response
-                const variations = [
-                    "C00LGUI SYSTEM ONLINE! WHAT DO U WANT BOZO!1!!",
-                    "TH1NK F4ST! MATRIX CHAT NODE RESPONDING TO GENERATION INJECTION!",
-                    "G3T PWN3DD!! CORE TELEMETRY DETECTED AND LOADED SUCCESSFULLY!"
-                ];
-                aiText = variations[Math.floor(Math.random() * variations.length)] + `\n\n[PARSED SOURCE CONTEXT]: "${userPrompt}"`;
-            }
-
-            outputBox.innerText = "COMPUTATION RETURN SHEET:\n\n" + aiText.toUpperCase();
-
-        } catch (error) {
-            outputBox.innerText = "XDDD REKT ERROR: CONNECTION FAILED\n\nRAW: " + error.message.toUpperCase();
-        }
-        runBtn.disabled = false;
-    }
-
-    function purgeLogs() {
-        inputArea.value = "";
-        outputBox.innerText = "BUFFER STATUS RESET. HOVER READY FOR RE-INJECTION CORES.";
-    }
-
-    function triggerSkybox() {
-        outputBox.innerText = "⚡ SKYBOX OVERRIDE: INJECTING TEAM C00LKIDD RED GLITCH TEXTURES TO ENVIRONMENT...!!";
-    }
-
-    function triggerESP() {
-        outputBox.innerText = "🛰️ ESP RENDERED: LOCATING SURVIVOR GRID NODES AND GENERATOR TELEMETRY LOCATIONS SUCCESSFUL.";
-    }
-
-    initAI();
-</script>
-
-
-
+</body>
+</html>
