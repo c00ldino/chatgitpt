@@ -43,19 +43,18 @@
         }
         
         .output-box { 
-            height: 140px; 
+            height: 160px; 
             overflow-y: auto; 
             margin-bottom: 12px; 
-            font-size: 15px; 
+            font-size: 14px; 
             line-height: 1.4; 
-            color: #ffffff; 
+            color: #34d399; 
             white-space: pre-wrap; 
             background: #000000;
             padding: 10px;
             border: 4px solid #ff0000;
             border-radius: 0px;
             font-family: monospace;
-            text-transform: uppercase;
         }
 
         .input-wrapper {
@@ -102,7 +101,7 @@
             padding: 10px; 
             font-family: inherit; 
             font-weight: bold; 
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             cursor: pointer;
             border-radius: 0px;
@@ -134,102 +133,89 @@
 <div class="terminal">
     <div class="header">c00lgui xddd</div>
     
-    <div class="output-box" id="output">SYSTEM STATUS: INITIALIZING CHAT EXPLORER MATRIX...</div>
+    <div class="output-box" id="output">SYSTEM BOOT: ALLOCATING NEURAL WEIGHT FILE CONTAINERS IN MEMORY...</div>
     
     <div class="input-wrapper">
         <textarea id="input" placeholder="ENTER INSTRUCTION COMMAND VECTOR DATA..." disabled></textarea>
     </div>
     
     <div class="exploit-grid">
-        <button id="run-btn" onclick="executeHax()" disabled>LOADING MATRIX...</button>
-        <button id="reset-btn" class="btn-utility" onclick="purgeLogs()" disabled>PURGE ALL</button>
-        <button id="sky-btn" class="btn-utility" onclick="triggerSkybox()" disabled>SET SKYBOX</button>
-        <button id="esp-btn" class="btn-utility" onclick="triggerESP()" disabled>ESP TRACK</button>
+        <button id="run-btn" disabled>LOADING HAXX...</button>
+        <button id="reset-btn" class="btn-utility" disabled>PURGE ALL</button>
+        <button id="sky-btn" class="btn-utility" disabled>SET SKYBOX</button>
+        <button id="esp-btn" class="btn-utility" disabled>ESP TRACK</button>
     </div>
 </div>
 
-<script>
+<script type="module">
+    import { pipeline } from 'https://jsdelivr.net';
+
     const outputBox = document.getElementById('output');
     const inputArea = document.getElementById('input');
     const runBtn = document.getElementById('run-btn');
     const resetBtn = document.getElementById('reset-btn');
     const skyBtn = document.getElementById('sky-btn');
     const espBtn = document.getElementById('esp-btn');
+    let generator = null;
 
-    function initAI() {
-        outputBox.innerText = "TEAM C00LKIDD JOIN TODAY!!! FAST UNBLOCKED MATRIX PROXY ONLINE. INPUT COMMAND NOW.";
-        inputArea.disabled = false;
-        runBtn.disabled = false;
-        resetBtn.disabled = false;
-        skyBtn.disabled = false;
-        espBtn.disabled = false;
-        runBtn.innerText = "CLICK 2 RUN H4X!!";
+    async function initAI() {
+        try {
+            outputBox.innerText = "⏳ FETCHING THE REAL GENERATIVE AI MODEL FROM CLOUD STORAGE MATRIX FOLDS...\n(Takes ~10 seconds on first load to buffer parameters!)";
+            
+            // Setting up a fully local language model that runs directly inside your Chromebook's processor
+            generator = await pipeline('text-generation', 'Xenova/distilgpt2');
+            
+            outputBox.innerText = "🟩 TEAM C00LKIDD ENGINE ONLINE // UNBLOCKED VISOR NODE ACTIVE.\nTYPE AN ORIGINAL PROMPT OR STORY STARTER BELOW AND RUN MODULE.";
+            inputArea.disabled = false;
+            runBtn.disabled = false;
+            resetBtn.disabled = false;
+            skyBtn.disabled = false;
+            espBtn.disabled = false;
+            runBtn.innerText = "CLICK 2 RUN H4X!!";
+        } catch (e) {
+            outputBox.innerText = "❌ PIPELINE INJECT FAILURE: " + e.message;
+        }
     }
 
-    function executeHax() {
+    // Direct module level event listeners prevent the button from freezing up
+    runBtn.addEventListener('click', async () => {
         const userPrompt = inputArea.value.trim();
-        if (!userPrompt) return;
+        if (!userPrompt || !generator) return;
 
-        outputBox.innerText = "COMPUTING VALUE MATRIX STEPS... TH1NK F4ST!!!";
+        outputBox.innerText = "🧠 CHATGITPT IS THINKING FROM SCRATCH... GENERATING UNPREDICTABLE TEXT CORES...";
         inputArea.value = "";
         runBtn.disabled = true;
 
-        // Clean, ultra-fast client-side generation tree built with valid Javascript syntax rules
-        setTimeout(() => {
-            const cleanPrompt = userPrompt.toLowerCase();
-            let matrixOutput = "";
+        try {
+            const output = await generator(userPrompt, {
+                max_new_tokens: 50,
+                temperature: 0.8,
+                do_sample: true
+            });
 
-            if (cleanPrompt.includes("story") || cleanPrompt.includes("write") || cleanPrompt.includes("tale")) {
-                matrixOutput = "📝 EXPLODE STORY MODULE SUCCESSFUL\n" +
-                               "--------------------------------------------------\n" +
-                               "PROMPT STRING SEEN: " + userPrompt.toUpperCase() + "\n\n" +
-                               "ONCE UPON A TIME, A BOZO SENT A PROMPT TO C00LGUI. " +
-                               "THE RED BORDERS FLASHED, TRAPPING INTERCEPT DATA LINES INSTANTLY. " +
-                               "U JUST GOT H4XX3DD!!! THE SCRIPT CLOSED SUCCESSFULLY.";
-            }
-            else if (cleanPrompt.includes("code") || cleanPrompt.includes("script") || cleanPrompt.includes("python")) {
-                matrixOutput = "💻 INJECT UTILITY CODE VECTOR SUCCESSFUL\n" +
-                               "--------------------------------------------------\n" +
-                               "DEF RUN_C00L_HAX_PROCESS():\n" +
-                               "    # PARAM SOURCE IN: '" + userPrompt.toUpperCase() + "'\n" +
-                               "    PRINT('G3T PWN3DD!! CHAT CORE INITIATED...')\n" +
-                               "    RETURN TRUE\n\n" +
-                               "RUN_C00L_HAX_PROCESS()";
-            }
-            else {
-                // High-velocity generation echo system
-                const responses = [
-                    "C00LGUI MATRIX ANSWER: WHAT DO U WANT BOZO!1!!",
-                    "G3T PWN3DD!! CORE TELEMETRY MATRIX PROCESSED YOUR INPUT STRING!",
-                    "TH1NK F4ST! SYSTEM ECHOS LOGGED VALUE SUCCESSFUL!"
-                ];
-                const randomChoice = responses[Math.floor(Math.random() * responses.length)];
-                matrixOutput = "✨ CHATGITPT LIVE GENERATIVE MATRIX\n" +
-                               "--------------------------------------------------\n" +
-                               randomChoice + "\n\n" +
-                               "[INPUT STRINGS READ]: \"" + userPrompt.toUpperCase() + "\"";
-            }
+            outputBox.innerText = "✨ REAL COMPUTED AI TEXT ARTIFACT:\n\n" + output.generated_text.toUpperCase();
+        } catch (error) {
+            outputBox.innerText = "❌ INJECTION EXCEPTION: " + error.message.toUpperCase();
+        }
+        runBtn.disabled = false;
+    });
 
-            outputBox.innerText = matrixOutput;
-            runBtn.disabled = false;
-        }, 300);
-    }
-
-    function purgeLogs() {
+    resetBtn.addEventListener('click', () => {
         inputArea.value = "";
-        outputBox.innerText = "BUFFER STATUS RESET. HOVER READY FOR RE-INJECTION CORES.";
-    }
+        outputBox.innerText = "BUFFER STATUS PURGED. READY FOR NEW DATA VECTOR STRINGS.";
+    });
 
-    function triggerSkybox() {
+    skyBtn.addEventListener('click', () => {
         outputBox.innerText = "⚡ SKYBOX OVERRIDE: INJECTING TEAM C00LKIDD RED GLITCH TEXTURES TO ENVIRONMENT...!!";
-    }
+    });
 
-    function triggerESP() {
+    espBtn.addEventListener('click', () => {
         outputBox.innerText = "🛰️ ESP RENDERED: LOCATING SURVIVOR GRID NODES AND GENERATOR TELEMETRY LOCATIONS SUCCESSFUL.";
-    }
+    });
 
     initAI();
 </script>
 
 </body>
 </html>
+
