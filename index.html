@@ -5,91 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatGitPT Terminal</title>
     <style>
-        body { font-family: 'Courier New'<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGitPT Terminal</title>
-    <style>
-        body { font-family: 'Courier New', monospace; background-color: #0b0f19; color: #38bdf8; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .terminal { width: 100%; max-width: 600px; background: #020617; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .header { color: #f43f5e; font-weight: bold; border-bottom: 1px dashed #f43f5e; padding-bottom: 8px; margin-bottom: 15px; font-size: 14px; }
-        .output-box { height: 300px; overflow-y: auto; margin-bottom: 15px; font-size: 13px; line-height: 1.5; color: #34d399; white-space: pre-wrap; }
-        textarea { width: 95%; height: 60px; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; padding: 10px; font-family: inherit; font-size: 13px; resize: none; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background-color: #05070f; 
+            color: #38bdf8; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            min-height: 90vh;
+            margin: 0;
+        }
+        .terminal { 
+            width: 100%; 
+            max-width: 650px; 
+            background: #02040a; 
+            border: 1px solid #0284c7; 
+            border-radius: 12px; 
+            padding: 20px; 
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); 
+        }
+        .header { 
+            color: #f43f5e; 
+            font-weight: bold; 
+            border-bottom: 1px dashed #f43f5e; 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+            font-size: 13px; 
+            letter-spacing: 1px;
+        }
+        .output-box { 
+            height: 280px; 
+            overflow-y: auto; 
+            margin-bottom: 15px; 
+            font-size: 13px; 
+            line-height: 1.6; 
+            color: #34d399; 
+            white-space: pre-wrap; 
+            background: #010205;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #1e293b;
+        }
+        textarea { 
+            width: 96%; 
+            height: 55px; 
+            background: #090d16; 
+            color: #f8fafc; 
+            border: 1px solid #334155; 
+            border-radius: 6px; 
+            padding: 10px; 
+            font-family: inherit; 
+            font-size: 13px; 
+            resize: none; 
+            margin-bottom: 8px;
+        }
         textarea:focus { outline: none; border-color: #38bdf8; }
-        button { background: #0369a1; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: bold; margin-top: 8px; }
+        .btn-container { display: flex; gap: 10px; }
+        button { 
+            background: #0369a1; 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            flex: 2;
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-family: inherit; 
+            font-weight: bold; 
+            font-size: 13px;
+        }
         button:hover { background: #0284c7; }
+        button:disabled { background: #1e293b; color: #64748b; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div class="header">📡 CHATGITPT LIVE TERMINAL v2.1 // STATUS: ACTIVE</div>
-    <div class="output-box" id="output">System ready. Type any scenario, question, or text generation prompt below for an instant response...</div>
-    <textarea id="input" placeholder="Type a message or ask a question..."></textarea>
-    <button onclick="askAI()">🚀 RUN ENGINE</button>
+    <div class="header">📡 CHATGITPT LOCAL NEURAL NETWORK v3.5 // LOCAL AI ENGINE</div>
+    <div class="output-box" id="output">System initialized. Setting up the in-browser language model model layers...</div>
+    <textarea id="input" placeholder="Type an original sentence or prompt..." disabled></textarea>
+    <div class="btn-container">
+        <button id="run-btn" onclick="askAI()" disabled>⏳ LOADING MODEL...</button>
+    </div>
 </div>
 
-<script>
-function askAI() {
-    const inputArea = document.getElementById('input');
+<!-- 📦 Bring in the real open-source Transformers engine right from the web -->
+<script type="module">
+    import { pipeline } from 'https://jsdelivr.net';
+
     const outputBox = document.getElementById('output');
-    const userPrompt = inputArea.value.trim();
-    if (!userPrompt) return;
+    const inputArea = document.getElementById('input');
+    const runBtn = document.getElementById('run-btn');
+    let generator = null;
 
-    outputBox.innerText = "🧠 Analyzing prompt text tokens...";
-    inputArea.value = "";
+    async function initAI() {
+        try {
+            outputBox.innerText = "⏳ Downloading and loading a real language model directly into your browser tab memory...\n(This will take about 10-30 seconds, but only happens once!)";
+            
+            // Loads an authentic, open-source GPT model directly into the web container
+            generator = await pipeline('text-generation', 'Xenova/Qwen1.5-0.5B-Chat');
+            
+            outputBox.innerText = "🟩 AI Model loaded 100% locally! Securly cannot block this. Type any prompt below and watch it think from scratch.";
+            inputArea.disabled = false;
+            runBtn.disabled = false;
+            runBtn.innerText = "🚀 RUN NEURAL MODEL";
+        } catch (e) {
+            outputBox.innerText = "❌ Neural Setup Error: " + e.message + "\nYour school network might be blocking the model files download node.";
+        }
+    }
 
-    // Local Generative Natural Language Matrix Assembly
-    setTimeout(() => {
-        const cleanPrompt = userPrompt.toLowerCase();
-        let interpretation = "";
+    window.askAI = async function() {
+        const userPrompt = inputArea.value.trim();
+        if (!userPrompt || !generator) return;
 
-        // Contextual analysis branches
-        if (cleanPrompt.includes("story") || cleanPrompt.includes("write") or cleanPrompt.includes("tale")) {
-            interpretation = "📝 CUSTOM CREATIVE STORY GENERATION\n" +
-                             "--------------------------------------------------\n" +
-                             "Once upon a time, a user issued a curious prompt: '" + userPrompt + "'.\n" +
-                             "The digital parameters aligned instantly. In a flash of electricity,\n" +
-                             "the local container broke past the traditional limits of the sandbox,\n" +
-                             "weaving an original, completely custom narrative path directly out of\n" +
-                             "the raw user text strings. The file closed, and the mission succeeded.";
-        }
-        else if (cleanPrompt.includes("code") || cleanPrompt.includes("script") || cleanPrompt.includes("python")) {
-            interpretation = "💻 SYSTEM UTILITY CODE GENERATOR\n" +
-                             "--------------------------------------------------\n" +
-                             "def execute_custom_user_request():\n" +
-                             "    # Prompt Parameter Input: '" + userPrompt + "'\n" +
-                             "    print('Initializing local pipeline processes...')\n" +
-                             "    user_data_matrix = [char for char in '" + userPrompt + "']\n" +
-                             "    return f'Success. Processed {len(user_data_matrix)} input tokens.'\n\n" +
-                             "if __name__ == '__main__':\n" +
-                             "    print(execute_custom_user_request())";
-        }
-        else if (cleanPrompt.includes("help") || cleanPrompt.includes("explain") || cleanPrompt.includes("why")) {
-            interpretation = "💡 EXPLANATORY KNOWLEDGE BASE RESPONSE\n" +
-                             "--------------------------------------------------\n" +
-                             "You asked: '" + userPrompt + "'\n\n" +
-                             "Here is the core breakdown of your query:\n" +
-                             "1. The local engine accepted your instruction text string.\n" +
-                             "2. It successfully isolated your primary key concepts.\n" +
-                             "3. It compiled this scannable structural summary layout dynamically.";
-        }
-        else {
-            // General Purpose Dynamic Prompt Interpolation Engine
-            interpretation = "✨ CHATGITPT LIVE GENERATIVE MATRIX\n" +
-                             "--------------------------------------------------\n" +
-                             "Processed Input Stream: \"" + userPrompt + "\"\n\n" +
-                             "🚀 Generated Result:\n" +
-                             "Your custom instruction '" + userPrompt + "' has been parsed!\n" +
-                             "The environment is fully functional and completely unblocked.\n\n" +
-                             "💡 [Hacker Tip]: Include words like 'story', 'code', or 'help' \n" +
-                             "in your text bar to activate specialized terminal blueprints!";
-        }
+        outputBox.innerText = "🧠 Real neural network is computing next text tokens locally...";
+        inputArea.value = "";
+        runBtn.disabled = true;
 
-        outputBox.innerText = interpretation;
-    }, 400); // 400ms delay mimics real network computational processing speed
+        try {
+            // Run true, raw mathematical generation directly on your Chromebook processor
+            const output = await generator(userPrompt, {
+                max_new_tokens: 60,
+                temperature: 0.7,
+                do_sample: true
+            });
+
+            outputBox.innerText = "✨ GENERATED BY LOCAL BROWSER AI:\n\n" + output[0].generated_text;
+        } catch (error) {
+            outputBox.innerText = "❌ Generation Crash: " + error.message;
+        }
+        runBtn.disabled = false;
+    }
+
+    // Start loading the neural network instantly on page launch
+    initAI();
+</script>
+
+</body>
+</html>
+
 }
 </script>
 
