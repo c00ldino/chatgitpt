@@ -1,86 +1,49 @@
 import os
+from transformers import pipeline
 
-def process_ai_generation():
-    # 1. Read the user's prompt file safely
+def run_real_ai():
+    # 1. Read whatever the user typed
     if not os.path.exists("prompt.txt"):
-        with open("prompt.txt", "w", encoding="utf-8") as f:
-            f.write("help")
-        user_prompt = "help"
-    else:
-        with open("prompt.txt", "r", encoding="utf-8") as f:
-            user_prompt = f.read().lower().strip()
+        print("prompt.txt not found.")
+        return
+        
+    with open("prompt.txt", "r", encoding="utf-8") as f:
+        user_prompt = f.read().strip()
         
     if not user_prompt:
-        output_text = "⚠️ SYSTEM ERROR: Prompt file is empty. Type a prompt inside prompt.txt."
-        with open("output.txt", "w", encoding="utf-8") as f:
-            f.write(output_text)
+        print("Prompt is empty.")
         return
 
-    # 2. Extract key subjects from user's sentence
-    has_story = "story" in user_prompt or "write" in user_prompt or "tale" in user_prompt
-    has_kai = "kai" in user_prompt
-    has_icecream = "ice cream" in user_prompt or "icecream" in user_prompt
-    has_banana = "banana" in user_prompt or "peel" in user_prompt or "slip" in user_prompt
-    has_hospital = "hospital" in user_prompt or "doctor" in user_prompt
+    print(f"🤖 Loading Neural Network into memory to process: '{user_prompt}'...")
 
-    # 3. Local Generative Logic Core (Zero API dependencies)
-    if has_story and has_kai:
-        # Dynamic Story Generator Block
-        title = "🍦 THE BANANA PEEL CATASTROPHE 🍦"
-        body = "Kai was having the best Monday of his life, strolling down the sidewalk while enjoying a massive, double-scoop mint chocolate chip ice cream cone. The sun was shining, and the waffle cone was crisp.\n\n"
+    try:
+        # 2. Initialize a true, self-contained text generation AI model
+        # This runs 100% locally on the GitHub server machine—no APIs, no network blocks.
+        generator = pipeline("text-generation", model="gpt2")
         
-        if has_banana:
-            body += "Suddenly, disaster struck. An impossibly bright yellow banana peel laid perfectly in his path. Before Kai could react, his foot made contact. His legs went flying skyward, the ice cream cone launched into orbit, and Kai landed on top of isla, and they had sex by accident.\n\n"
-        else:
-            body += "Suddenly,isla be came pregnate and they hadto go to the hospital.\n\n"
-            
-        if has_hospital:
-            body += "then after she gave birth, he imediatly started humping her'\n\n"
-        else:
-            body += "then she started sucking as hard as she could, cum spraying everywere!.\n\n"
-            
-        output_text = f"==================================================\n{title}\n==================================================\n{body}🎮 [System Status]: Generation Complete.\n=================================================="
+        # 3. Compute and generate original text tokens
+        print("🧠 Computing token weights and generating response...")
+        results = generator(
+            user_prompt, 
+            max_length=150, 
+            num_return_sequences=1,
+            temperature=0.7,
+            top_k=50,
+            top_p=0.95
+        )
+        
+        ai_response = results[0]["generated_text"]
+        
+    except Exception as e:
+        ai_response = f"❌ Machine Learning Engine Error: {str(e)}"
 
-    elif "code" in user_prompt or "script" in user_prompt or "python" in user_prompt:
-        output_text = (
-            "==================================================\n"
-            "💻 GENERATED SYSTEM CODE ARTIFACT\n"
-            "==================================================\n"
-            "def local_data_compiler():\n"
-            "    print('Initializing safe sandbox environment...')\n"
-            "    matrix = [x for x in range(50) if x % 2 == 0]\n"
-            "    return matrix\n\n"
-            "if __name__ == '__main__':\n"
-            "    print(f'Execution successful. Array generated: {local_data_compiler()}')\n"
-        )
-    elif "homework" in user_prompt or "structure" in user_prompt or "list" in user_prompt:
-        output_text = (
-            "==================================================\n"
-            "📋 GENERATED MARCKDOWN CORE STRUCTURE\n"
-            "==================================================\n"
-            "# 📑 DIGITAL PROJECT REPOSITORY LOGS\n\n"
-            "## 🎯 Primary Project Parameters\n"
-            "*   **Task 01:** Initialize secure cloud storage matrix environments.\n"
-            "*   **Task 02:** Route file outputs directly to repository branches.\n"
-        )
-    else:
-        output_text = (
-            "==================================================\n"
-            "🤖 CHATGITPT OFFLINE CORE WORKING\n"
-            "==================================================\n"
-            f"Logged Prompt: \"{user_prompt}\"\n\n"
-            "💡 Try adding keywords to your prompt to generate data blocks:\n"
-            "-> Include words like 'story' and 'kai' to compile your creative text!\n"
-            "-> Include words like 'code' or 'script' to generate utilities."
-        )
-
-    # 4. Output the text directly back into your repository
+    # 4. Save the machine-generated text to output.txt
     with open("output.txt", "w", encoding="utf-8") as f:
-        f.write(output_text)
-    print("Local generation complete!")
+        f.write(ai_response)
+    print("🤖 Generation complete! Output saved.")
 
 if __name__ == "__main__":
-    process_ai_generation()
+    run_real_ai()
 
 
 
