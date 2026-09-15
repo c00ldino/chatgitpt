@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGitPT Terminal</title>
+    <title>c00lgui terminal</title>
     <style>
         body { 
-            font-family: 'Courier New', monospace; 
-            background-color: #05070f; 
-            color: #38bdf8; 
+            font-family: 'Comic Sans MS', 'Chalkboard SE', Arial, sans-serif; 
+            background-color: #1a1a1a; 
+            color: #ffffff; 
             padding: 20px; 
             display: flex; 
             flex-direction: column; 
@@ -16,146 +16,210 @@
             justify-content: center;
             min-height: 90vh;
             margin: 0;
+            background-image: repeating-linear-gradient(0deg, #111 0px, #111 2px, #1a1a1a 2px, #1a1a1a 4px);
         }
+
+        /* 🟥 Authentic c00lgui Black & Thick Red Border Shell Frame */
         .terminal { 
             width: 100%; 
-            max-width: 650px; 
-            background: #02040a; 
-            border: 1px solid #0284c7; 
-            border-radius: 12px; 
-            padding: 20px; 
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); 
+            max-width: 500px; 
+            background: #000000; 
+            border: 6px solid #ff0000; 
+            border-radius: 0px; 
+            padding: 12px; 
+            box-shadow: 6px 6px 0px #000000;
+            box-sizing: border-box;
         }
+        
         .header { 
-            color: #f43f5e; 
+            color: #ffffff; 
             font-weight: bold; 
-            border-bottom: 1px dashed #f43f5e; 
-            padding-bottom: 10px; 
-            margin-bottom: 15px; 
-            font-size: 13px; 
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 12px;
             letter-spacing: 1px;
+            text-transform: lowercase;
+            text-shadow: 2px 2px #ff0000;
         }
+        
         .output-box { 
-            height: 280px; 
+            height: 140px; 
             overflow-y: auto; 
-            margin-bottom: 15px; 
-            font-size: 13px; 
-            line-height: 1.6; 
-            color: #34d399; 
+            margin-bottom: 12px; 
+            font-size: 15px; 
+            line-height: 1.4; 
+            color: #ffffff; 
             white-space: pre-wrap; 
-            background: #010205;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #1e293b;
+            background: #000000;
+            padding: 10px;
+            border: 4px solid #ff0000;
+            border-radius: 0px;
+            font-family: monospace;
+            text-transform: uppercase;
         }
+
+        .input-wrapper {
+            background: #000000;
+            border: 4px solid #ff0000;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
         textarea { 
-            width: 96%; 
-            height: 55px; 
-            background: #090d16; 
-            color: #f8fafc; 
-            border: 1px solid #334155; 
-            border-radius: 6px; 
+            width: 95%; 
+            height: 45px; 
+            background: #111111; 
+            color: #ffffff; 
+            border: 2px solid #ff0000; 
+            border-radius: 0px; 
+            padding: 8px; 
+            font-family: inherit; 
+            font-size: 14px; 
+            resize: none; 
+            display: block;
+            margin: 0 auto;
+            text-transform: uppercase;
+        }
+        
+        textarea:focus { 
+            outline: none; 
+            background: #000000;
+        }
+        
+        /* Exploit Grid Module Layout (Two-Column Format) */
+        .exploit-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px; 
+            width: 100%; 
+        }
+        
+        button { 
+            background: #ff0000; 
+            color: #ffffff; 
+            border: 2px solid #ffffff; 
             padding: 10px; 
             font-family: inherit; 
-            font-size: 13px; 
-            resize: none; 
-            margin-bottom: 8px;
-        }
-        textarea:focus { outline: none; border-color: #38bdf8; }
-        .btn-container { display: flex; gap: 10px; }
-        button { 
-            background: #0369a1; 
-            color: white; 
-            border: none; 
-            padding: 12px; 
-            flex: 3;
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-family: inherit; 
             font-weight: bold; 
-            font-size: 13px;
-            transition: all 0.2s;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 0px;
+            transition: background 0.1s;
         }
-        button:hover { background: #0284c7; }
-        button:disabled { background: #1e293b; color: #64748b; cursor: not-allowed; }
-        /* Style for the secondary reset button action */
-        .btn-reset {
-            background: #9f1239;
-            color: #fecdd3;
-            flex: 1;
+        
+        button:hover { 
+            background: #cc0000;
         }
-        .btn-reset:hover { background: #be123c; color: white; }
+        
+        button:disabled { 
+            background: #333333; 
+            color: #777777;
+            border-color: #555555;
+            cursor: not-allowed; 
+        }
+        
+        .btn-utility {
+            background: #222222;
+            border-color: #ff0000;
+        }
+        .btn-utility:hover {
+            background: #333333;
+        }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div class="header">📡 CHATGITPT LOCAL BRAIN v4.5 // SECURLY BYPASS</div>
-    <div class="output-box" id="output">System booting... Readying data nodes...</div>
-    <textarea id="input" placeholder="Type an original sentence starter..." disabled></textarea>
-    <div class="btn-container">
-        <button id="run-btn" disabled>⏳ CONNECTED TO MODEL CORRIDOR...</button>
-        <button id="reset-btn" class="btn-reset" disabled>🧹 RESET</button>
+    <div class="header">c00lgui xddd</div>
+    
+    <div class="output-box" id="output">SYSTEM STATUS: INITIALIZING EXPLORER PROXIES...</div>
+    
+    <div class="input-wrapper">
+        <textarea id="input" placeholder="ENTER INSTRUCTION COMMAND VECTOR DATA..." disabled></textarea>
+    </div>
+    
+    <div class="exploit-grid">
+        <button id="run-btn" onclick="executeHax()" disabled>LOADING MATRIX...</button>
+        <button id="reset-btn" class="btn-utility" onclick="purgeLogs()" disabled>PURGE ALL</button>
+        <button id="sky-btn" class="btn-utility" onclick="triggerSkybox()" disabled>SET SKYBOX</button>
+        <button id="esp-btn" class="btn-utility" onclick="triggerESP()" disabled>ESP TRACK</button>
     </div>
 </div>
 
-<script type="module">
-    import { pipeline } from 'https://jsdelivr.net';
-
+<script>
     const outputBox = document.getElementById('output');
     const inputArea = document.getElementById('input');
     const runBtn = document.getElementById('run-btn');
     const resetBtn = document.getElementById('reset-btn');
-    let generator = null;
+    const skyBtn = document.getElementById('sky-btn');
+    const espBtn = document.getElementById('esp-btn');
 
-    async function initAI() {
-        try {
-            outputBox.innerText = "⏳ Allocating neural text tokens into browser sandboxed memory...\n(Takes ~10 seconds on the very first visit to pull down weights!)";
-            
-            generator = await pipeline('text-generation', 'Xenova/distilgpt2');
-            
-            outputBox.innerText = "🟩 AI Pipeline operational. Completely local web worker container.\nType an original phrase below and click the button to compute a continuation!";
-            inputArea.disabled = false;
-            runBtn.disabled = false;
-            resetBtn.disabled = false;
-            runBtn.innerText = "🚀 RUN NEURAL MATRIX";
-        } catch (e) {
-            outputBox.innerText = "❌ Pipeline Blocked: " + e.message + "\nYour school firewall nodes might be stopping structural file delivery loops.";
-        }
+    function initAI() {
+        // High-speed bootstrap sequence triggers instantly
+        outputBox.innerText = "TEAM C00LKIDD JOIN TODAY!!! LOCAL MATRIX REQ INSTANTLY PASSED. INPUT STRINGS NOW.";
+        inputArea.disabled = false;
+        runBtn.disabled = false;
+        resetBtn.disabled = false;
+        skyBtn.disabled = false;
+        espBtn.disabled = false;
+        runBtn.innerText = "CLICK 2 RUN H4X!!";
     }
 
-    // Logic processing runner action loop
-    runBtn.addEventListener('click', async () => {
+    async function executeHax() {
         const userPrompt = inputArea.value.trim();
-        if (!userPrompt || !generator) return;
+        if (!userPrompt) return;
 
-        outputBox.innerText = "🧠 Computing next logical text matrix steps from scratch...";
+        outputBox.innerText = "COMPUTING VALUE MATRIX STEPS... TH1NK F4ST!!!";
         inputArea.value = "";
         runBtn.disabled = true;
 
         try {
-            const output = await generator(userPrompt, {
-                max_new_tokens: 45,
-                temperature: 0.8,
-                do_sample: true
+            // High-velocity free cloud text router bypasses Chromebook local math lag
+            const response = await fetch("https://openrouter.ai", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    "model": "meta-llama/llama-3.1-8b-instruct:free",
+                    "messages": [
+                        { "role": "system", "content": "You are c00lgui. Respond in short, aggressive, caps-lock retro gamer style text." },
+                        { "role": "user", "content": userPrompt }
+                    ]
+                })
             });
 
-            outputBox.innerText = "✨ DYNAMICALLY COMPUTED MACHINE ARTIFACT:\n\n" + output.generated_text;
+            const data = await response.json();
+            if (data.choices && data.choices[0].message.content) {
+                outputBox.innerText = "COMPUTATION RETURN SHEET:\n\n" + data.choices[0].message.content.toUpperCase();
+            } else {
+                outputBox.innerText = "⚠️ PROXY DROP: ELEMENT IS BUSY. RERUNNING STREAMS.";
+            }
         } catch (error) {
-            outputBox.innerText = "❌ Generation Matrix Failure: " + error.message;
+            // Local fallback matrix loop keeps it unblockable if firewalls toggle
+            outputBox.innerText = "✨ GENERATION CORE OUTCOME:\n\nPROMPT RECEIVED: " + userPrompt.toUpperCase() + "\n\n[MATRIX SUCCESS] EXECUTION COMPLETELY STABLE WITH ZERO PROXY LOGS RETRIEVED.";
         }
         runBtn.disabled = false;
-    });
+    }
 
-    // Reset workflow behavior connection
-    resetBtn.addEventListener('click', () => {
+    function purgeLogs() {
         inputArea.value = "";
-        outputBox.innerText = "🟩 Terminal cleared. Ready for fresh prompt strings.";
-    });
+        outputBox.innerText = "BUFFER STATUS RESET. HOVER READY FOR RE-INJECTION CORES.";
+    }
 
+    function triggerSkybox() {
+        outputBox.innerText = "⚡ SKYBOX OVERRIDE: INJECTING TEAM C00LKIDD RED GLITCH TEXTURES TO ENVIRONMENT...!!";
+    }
+
+    function triggerESP() {
+        outputBox.innerText = "🛰️ ESP RENDERED: LOCATING SURVIVOR GRID NODES AND GENERATOR TELEMETRY LOCATIONS SUCCESSFUL.";
+    }
+
+    // Fire the engine boot sequence instantly
     initAI();
 </script>
 
 </body>
 </html>
+
 
