@@ -68,25 +68,34 @@
             color: white; 
             border: none; 
             padding: 12px; 
-            flex: 2;
+            flex: 3;
             border-radius: 6px; 
             cursor: pointer; 
             font-family: inherit; 
             font-weight: bold; 
             font-size: 13px;
+            transition: all 0.2s;
         }
         button:hover { background: #0284c7; }
         button:disabled { background: #1e293b; color: #64748b; cursor: not-allowed; }
+        /* Style for the secondary reset button action */
+        .btn-reset {
+            background: #9f1239;
+            color: #fecdd3;
+            flex: 1;
+        }
+        .btn-reset:hover { background: #be123c; color: white; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div class="header">📡 CHATGITPT LOCAL BRAIN v4.0 // LOCAL CHROMIE ENGINE</div>
-    <div class="output-box" id="output">System booting... Fetching serverless engine node matrix...</div>
-    <textarea id="input" placeholder="Type a sentence starter here..." disabled></textarea>
+    <div class="header">📡 CHATGITPT LOCAL BRAIN v4.5 // SECURLY BYPASS</div>
+    <div class="output-box" id="output">System booting... Readying data nodes...</div>
+    <textarea id="input" placeholder="Type an original sentence starter..." disabled></textarea>
     <div class="btn-container">
-        <button id="run-btn" onclick="window.askAI()" disabled>⏳ BOOTING CORE MODEL...</button>
+        <button id="run-btn" disabled>⏳ CONNECTED TO MODEL CORRIDOR...</button>
+        <button id="reset-btn" class="btn-reset" disabled>🧹 RESET</button>
     </div>
 </div>
 
@@ -96,50 +105,57 @@
     const outputBox = document.getElementById('output');
     const inputArea = document.getElementById('input');
     const runBtn = document.getElementById('run-btn');
+    const resetBtn = document.getElementById('reset-btn');
     let generator = null;
 
     async function initAI() {
         try {
-            outputBox.innerText = "⏳ Allocating cloud neural weights into local browser memory container...\n(Takes ~10 seconds on first run to structure background cache folds.)";
+            outputBox.innerText = "⏳ Allocating neural text tokens into browser sandboxed memory...\n(Takes ~10 seconds on the very first visit to pull down weights!)";
             
-            // Xenova/distilgpt2 is an incredibly fast, lightweight true generative engine model
             generator = await pipeline('text-generation', 'Xenova/distilgpt2');
             
-            outputBox.innerText = "🟩 AI Brain operational. Completely local. Securly firewall unblockable.\nType an original phrase below and watch the neural network finish your thought.";
+            outputBox.innerText = "🟩 AI Pipeline operational. Completely local web worker container.\nType an original phrase below and click the button to compute a continuation!";
             inputArea.disabled = false;
             runBtn.disabled = false;
+            resetBtn.disabled = false;
             runBtn.innerText = "🚀 RUN NEURAL MATRIX";
         } catch (e) {
-            outputBox.innerText = "❌ Initialization Blocked: " + e.message + "\nYour school network security nodes might be stopping structural CDN file streaming.";
+            outputBox.innerText = "❌ Pipeline Blocked: " + e.message + "\nYour school firewall nodes might be stopping structural file delivery loops.";
         }
     }
 
-    // Explicitly attaching the engine runner function straight to window scope makes the button click work 100% of the time!
-    window.askAI = async function() {
+    // Logic processing runner action loop
+    runBtn.addEventListener('click', async () => {
         const userPrompt = inputArea.value.trim();
         if (!userPrompt || !generator) return;
 
-        outputBox.innerText = "🧠 Running neural layer calculations on your hardware...";
+        outputBox.innerText = "🧠 Computing next logical text matrix steps from scratch...";
         inputArea.value = "";
         runBtn.disabled = true;
 
         try {
-            // Real, unscripted text generation computed straight on your Chromebook chip
             const output = await generator(userPrompt, {
-                max_new_tokens: 50,
+                max_new_tokens: 45,
                 temperature: 0.8,
                 do_sample: true
             });
 
-            outputBox.innerText = "✨ GENERATED TEXT ARTIFACT:\n\n" + output[0].generated_text;
+            outputBox.innerText = "✨ DYNAMICALLY COMPUTED MACHINE ARTIFACT:\n\n" + output.generated_text;
         } catch (error) {
-            outputBox.innerText = "❌ Generation Matrix Crash: " + error.message;
+            outputBox.innerText = "❌ Generation Matrix Failure: " + error.message;
         }
         runBtn.disabled = false;
-    }
+    });
+
+    // Reset workflow behavior connection
+    resetBtn.addEventListener('click', () => {
+        inputArea.value = "";
+        outputBox.innerText = "🟩 Terminal cleared. Ready for fresh prompt strings.";
+    });
 
     initAI();
 </script>
 
 </body>
 </html>
+
