@@ -19,7 +19,8 @@ def process_ai_generation():
 
     # 2. Route directly to an open-source model inference endpoint
     # Using an open API endpoint ensures zero key management requirements for your account
-    API_URL = "https://huggingface.co"
+       API_URL = "https://huggingface.co"
+
     
     payload = {
         "inputs": f"<|system|>\nYou are an advanced, helpful AI assistant. Answer the user's question perfectly.</s>\n<|user|>\n{user_prompt}</s>\n<|assistant|>\n",
